@@ -52,17 +52,20 @@ O fluxo de execução ocorre da seguinte forma:
 
 Fluxo resumido:
 
+```text
 Usuário
-    ↓
+   ↓
 Recuperador (RAG + ChromaDB)
-    ↓
- ┌───────────────┬───────────────┬───────────────┬───────────────┐
- │ Shakespeare   │ Dostoiévski   │ Clarice       │ Virginia Woolf│
- └───────────────┴───────────────┴───────────────┴───────────────┘
-    ↓
+   ↓
+├─ Shakespeare
+├─ Dostoiévski
+├─ Clarice Lispector
+└─ Virginia Woolf
+   ↓
 Moderador
-    ↓
+   ↓
 Resposta Final
+```
 
 ---
 
@@ -164,62 +167,81 @@ Base documental:
 
 ### retrieve_context
 
-Tool usada pelo Recuperador.
+Ferramenta utilizada pelo Agente Recuperador para realizar buscas semânticas na base vetorial.
 
-Função:
+**Fluxo de funcionamento:**
 
-Recebe a pergunta do usuário
-↓
-Consulta ChromaDB
-↓
-Retorna trechos relevantes
+Pergunta do usuário  
+↓  
+Consulta ao ChromaDB  
+↓  
+Recuperação dos documentos mais relevantes  
+↓  
+Envio do contexto aos agentes especialistas
+
+---
 
 ### author_profile
 
-Retorna informações do autor:
+Ferramenta responsável por fornecer informações sobre um autor específico, auxiliando os agentes na construção de respostas coerentes com seu estilo literário.
 
-Temas recorrentes
-Estilo de escrita
-Tom emocional
-Características narrativas
+**Informações recuperadas:**
 
-Por exemplo:
+- Temas recorrentes;
+- Estilo de escrita;
+- Tom emocional;
+- Características narrativas.
 
-get_author_profile("clarice")
+**Exemplo de uso:**
 
-Retorna uma mensagem introspectiva, existencialista, com fluxo de consciência e reflexão sobre identidade
+`get_author_profile("clarice")`
+
+**Resultado esperado:**
+
+Informações relacionadas à escrita de Clarice Lispector, como introspecção, existencialismo, fluxo de consciência e reflexões sobre identidade.
+
+---
 
 ### validate_context
 
-Verifica se os trechos recuperados realmente pertencem ao autor.
+Ferramenta utilizada para verificar se os trechos recuperados pertencem ao autor correto e são relevantes para a consulta realizada.
 
-Isso ajuda a justificar melhor o uso de MCP e tools.
+**Objetivos:**
+
+- Garantir a consistência do contexto recuperado;
+- Reduzir respostas incorretas ou fora do escopo;
+- Aumentar a confiabilidade do sistema.
+
+---
 
 ### format_response
 
-Tool usada pelo Moderador.
+Ferramenta utilizada pelo Agente Moderador para organizar e estruturar as respostas geradas pelos agentes especialistas.
 
-Recebe:
+**Entrada:**
 
-Resposta Shakespeare
-Resposta Dostoiévski
-Resposta Clarice
-Resposta Woolf
+- Resposta do agente Shakespeare;
+- Resposta do agente Dostoiévski;
+- Resposta do agente Clarice Lispector;
+- Resposta do agente Virginia Woolf.
 
-e organiza:
+**Saída esperada:**
 
-🎭 Shakespeare:
-...
+🎭 **Shakespeare**
 
-📖 Dostoiévski:
-...
+> Resposta gerada pelo agente.
 
-🪞 Clarice:
-...
+📖 **Dostoiévski**
 
-🌊 Virginia Woolf:
-...
+> Resposta gerada pelo agente.
 
+🪞 **Clarice Lispector**
+
+> Resposta gerada pelo agente.
+
+🌊 **Virginia Woolf**
+
+> Resposta gerada pelo agente.
 ---
 
 ## Uso do MCP
