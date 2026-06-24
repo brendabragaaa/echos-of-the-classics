@@ -1,6 +1,9 @@
 # mcp_server/server.py
 from mcp.server.fastmcp import FastMCP
 
+# Importando a função de busca de contexto do módulo RAG
+from rag.retrieval import buscar_contexto
+
 # Importando as funções que você fez na pasta tools
 from tools.retrieve_content import retrieve_content
 from tools.author_profile import get_author_profile
