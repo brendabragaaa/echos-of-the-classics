@@ -1,447 +1,254 @@
+```markdown
+<p align="center">
+  <img src="./cover.png" alt="Echoes of the Classics Banner" width="100%">
+</p>
+
 # Echoes of the Classics
 
-Sistema Multiagente de Perspectivas Literárias com LLMs Locais
+> **Sistema Multiagente de Perspectivas Literárias com LLMs Locais**
+
+O **Echoes of the Classics** é um sistema multiagente inteligente baseado em Modelos de Linguagem de grande porte (LLMs) executados localmente. O sistema é capaz de simular como grandes autores da literatura mundial — *William Shakespeare, Fiódor Dostoiévski, Clarice Lispector e Virginia Woolf* — responderiam a uma mesma pergunta, dilema ou reflexão trazida pelo usuário, fundamentando suas respostas em trechos reais de suas obras por meio de técnicas de RAG (Geração Aumentada por Recuperação).
+
+---
 
 ## Integrantes
 
-* Brenda Braga de Lima
-* Leticia de Fragas
-* Mariane Schneider da Silva
-
-Disciplina: Inteligência Artificial
-
-Professores: Diego A. Lusa e Roberto Rabello
-
----
-
-## Descrição do Problema
-
-Pessoas frequentemente buscam diferentes perspectivas para refletir sobre questões pessoais, emocionais, filosóficas ou literárias. Entretanto, acessar e compreender a visão de grandes autores da literatura exige conhecimento prévio de suas obras e estilos.
-
-Este projeto propõe um sistema multiagente capaz de simular como diferentes escritores clássicos responderiam a uma mesma pergunta ou situação apresentada pelo usuário. A partir de uma base documental construída com obras de cada autor, o sistema recupera contexto relevante e gera respostas coerentes com os temas, linguagem e características presentes em seus trabalhos.
-
-Dessa forma, o usuário pode explorar múltiplas interpretações de um mesmo assunto através das perspectivas de William Shakespeare, Fiódor Dostoiévski, Clarice Lispector e Virginia Woolf.
-
----
-
-## Objetivo da Solução
-
-Desenvolver um sistema multiagente baseado em LLMs locais capaz de receber perguntas, reflexões, situações pessoais ou temas livres e gerar respostas independentes inspiradas em diferentes autores da literatura mundial.
-
-A solução busca:
-
-* Simular perspectivas literárias distintas para um mesmo tema;
-* Utilizar recuperação de contexto para fundamentar as respostas em obras reais;
-* Demonstrar a cooperação entre múltiplos agentes especializados;
-* Explorar diferenças de estilo, linguagem e visão de mundo entre autores clássicos;
-* Aplicar técnicas de RAG, embeddings, MCP e modelos locais em um sistema funcional.
-
----
-
-## Arquitetura Multiagente
-
-O sistema utiliza uma arquitetura composta por seis agentes especializados que colaboram para gerar múltiplas perspectivas literárias sobre uma mesma entrada fornecida pelo usuário.
-
-O fluxo de execução ocorre da seguinte forma:
-
-1. O usuário envia uma pergunta, reflexão, situação pessoal ou tema livre através do terminal.
-2. O Agente Recuperador consulta a base vetorial e recupera trechos relevantes relacionados aos autores e ao tema da consulta.
-3. O contexto recuperado é disponibilizado aos agentes especialistas.
-4. Cada agente especialista gera sua própria resposta inspirada no estilo, nos temas recorrentes e nas características literárias de seu respectivo autor.
-5. O Agente Moderador recebe as respostas produzidas pelos especialistas, organiza o conteúdo e apresenta o resultado final ao usuário de forma estruturada.
-
-Fluxo resumido:
-
-```text
-Usuário
-   ↓
-Recuperador (RAG + ChromaDB)
-   ↓
-├─ Shakespeare
-├─ Dostoiévski
-├─ Clarice Lispector
-└─ Virginia Woolf
-   ↓
-Moderador
-   ↓
-Resposta Final
-```
-
----
-
-## Agentes Especializados
-
-### Recuperador (Retriever Agent)
-
-* Realiza busca semântica na base vetorial
-* Recupera trechos relevantes das obras
-* Fornece contexto para os demais agentes
-* Implementa a estratégia RAG do sistema
-
-### Shakespeare Agent
-
-Produz respostas inspiradas na linguagem e nos temas presentes nas obras de William Shakespeare.
-Enfatiza tragédia, destino, paixão, honra, poder e conflitos humanos.
-
-Especialista em:
-
-* Tragédias
-* Comédias
-* Sonetos
-* Temas de poder, ambição, destino, paixão, honra e conflitos humanos.
-
-Base documental:
-
-* Hamlet
-* Romeu e Julieta
-* Otelo
-
----
-
-### Dostoiévski Agent
-
-Produz respostas inspiradas nas reflexões filosóficas e psicológicas de Dostoiévski.
-
-Especialista em:
-
-* Filosofia existencial
-* Psicologia dos personagens
-* Temas de  moralidade, livre-arbítrio, culpa, fé e sofrimento
-
-Base documental:
-
-* Crime e Castigo
-* Noites Brancas
-* Memórias do Subsolo
-
----
-
-### Clarice Lispector Agent
-
-Produz respostas introspectivas focadas na experiência interior e na construção da identidade.
-
-Especialista em:
-
-* Fluxo de consciência
-* Existencialismo
-* Identidade e subjetividade
-* Interioridade humana 
-
-Base documental:
-
-* A Hora da Estrela
-* Perto do Coração Selvagem
-* Laços de Família
-
----
-
-### Virginia Woolf Agent
-
-Produz respostas influenciadas pelo modernismo e pelo fluxo de consciência.
-
-Especialista em:
-
-* Modernismo
-* Fluxo de consciência
-* Tempo psicológico
-* Explora perspectivas narrativas, memória, tempo e subjetividade
-
-Base documental:
-
-* Ao Farol
-* Orlando
-* Um Teto Todo Seu
-
----
-
-### Moderador (Moderator Agent)
-
-* Recebe as respostas dos agentes especialistas
-* Organiza e apresenta os resultados ao usuário
-* Garante consistência no formato de saída
-* Pode destacar semelhanças e diferenças entre as perspectivas apresentadas.
-
----
-
-## Tools Disponíveis
-
-### retrieve_context
-
-Ferramenta utilizada pelo Agente Recuperador para realizar buscas semânticas na base vetorial.
-
-**Fluxo de funcionamento:**
-
-Pergunta do usuário  
-↓  
-Consulta ao ChromaDB  
-↓  
-Recuperação dos documentos mais relevantes  
-↓  
-Envio do contexto aos agentes especialistas
-
----
-
-### author_profile
-
-Ferramenta responsável por fornecer informações sobre um autor específico, auxiliando os agentes na construção de respostas coerentes com seu estilo literário.
-
-**Informações recuperadas:**
-
-- Temas recorrentes;
-- Estilo de escrita;
-- Tom emocional;
-- Características narrativas.
-
-**Exemplo de uso:**
-
-`get_author_profile("clarice")`
-
-**Resultado esperado:**
-
-Informações relacionadas à escrita de Clarice Lispector, como introspecção, existencialismo, fluxo de consciência e reflexões sobre identidade.
-
----
-
-### validate_context
-
-Ferramenta utilizada para verificar se os trechos recuperados pertencem ao autor correto e são relevantes para a consulta realizada.
-
-**Objetivos:**
-
-- Garantir a consistência do contexto recuperado;
-- Reduzir respostas incorretas ou fora do escopo;
-- Aumentar a confiabilidade do sistema.
-
----
-
-### format_response
-
-Ferramenta utilizada pelo Agente Moderador para organizar e estruturar as respostas geradas pelos agentes especialistas.
-
-**Entrada:**
-
-- Resposta do agente Shakespeare;
-- Resposta do agente Dostoiévski;
-- Resposta do agente Clarice Lispector;
-- Resposta do agente Virginia Woolf.
-
-**Saída esperada:**
-
-🎭 **Shakespeare**
-
-> Resposta gerada pelo agente.
-
-📖 **Dostoiévski**
-
-> Resposta gerada pelo agente.
-
-🪞 **Clarice Lispector**
-
-> Resposta gerada pelo agente.
-
-🌊 **Virginia Woolf**
-
-> Resposta gerada pelo agente.
----
-
-## Uso do MCP
-
-O projeto utiliza MCP (Model Context Protocol) para padronizar a comunicação entre agentes e ferramentas.
-
-O MCP atua como uma camada intermediária responsável por:
-
-* Registrar ferramentas disponíveis;
-* Encaminhar chamadas dos agentes;
-* Padronizar entrada e saída de dados;
-* Facilitar a integração entre componentes do sistema.
-
-Arquivos relacionados:
-
-* mcp_server/server.py
-* mcp_server/tools.py
-
----
-
-## Estratégia de RAG
-
-A abordagem Retrieval-Augmented Generation é utilizada para reduzir alucinações e aumentar a precisão das respostas.
-
-Fluxo:
-
-1. Usuário realiza uma pergunta.
-2. A consulta é transformada em embedding.
-3. O ChromaDB realiza busca vetorial.
-4. Os documentos mais relevantes são recuperados.
-5. O contexto é enviado aos agentes.
-6. Os agentes geram respostas fundamentadas nos documentos recuperados.
-
----
-
-## Base de Conhecimento
-
-A base documental foi construída a partir de obras literárias e materiais de domínio público relacionados aos autores estudados.
-
-Estrutura:
-
-knowledge_base/
-
-* shakespeare/
-* dostoievski/
-* lispector/
-* woolf/
-
-Os documentos são utilizados exclusivamente para fins acadêmicos.
-
----
-
-## Embeddings e Banco Vetorial
-
-Tecnologia prevista:
-
-* ChromaDB
-
-O sistema utilizará embeddings para representar semanticamente os documentos da base de conhecimento, permitindo a recuperação de contexto relevante para os agentes especializados.
-
-Funções:
-
-* Indexação semântica dos documentos;
-* Busca vetorial por similaridade;
-* Recuperação contextual para suporte à geração das respostas.
-
-**Observação:** O modelo de embeddings será definido durante a implementação do projeto.
-
----
-
-## Modelo Local Utilizado
-
-Framework previsto:
-
-* Ollama
-
-O sistema utilizará um modelo de linguagem executado localmente para garantir independência de APIs externas e maior controle sobre o ambiente de execução.
-
-**Observação:** O modelo específico será definido durante a implementação e testes do projeto.
+* **Brenda Braga de Lima**
+* **Leticia de Fragas**
+* **Mariane Schneider da Silva**
+
+**Disciplina:** Inteligência Artificial  
+**Professores:** Diego A. Lusa e Roberto Rabello  
 
 ---
 
 ## Tecnologias Utilizadas
 
-Tecnologias previstas para o desenvolvimento:
+Para o desenvolvimento e controle do ecossistema, o projeto faz uso das seguintes ferramentas:
 
-* Python 3.11+
-* Ollama
-* ChromaDB
-* MCP (Model Context Protocol)
-* Git
-* GitHub
-
-Outras bibliotecas poderão ser adicionadas conforme a evolução do projeto.
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Ollama](https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white) ![ChromaDB](https://img.shields.io/badge/ChromaDB-4A90E2?style=for-the-badge&logo=databricks&logoColor=white) ![MCP](https://img.shields.io/badge/MCP-⚡%20Model%20Context-9B51E0?style=for-the-badge) ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
 ---
 
-## Dependências
+## Descrição do Problema
 
-As dependências do projeto serão listadas no arquivo:
+Acessar e compreender profundamente a visão de grandes autores da literatura mundial exige um denso conhecimento prévio de suas obras, contexts históricos e estilos literários. Quando pessoas buscam diferentes perspectivas para refletir sobre questões pessoais, emocionais ou filosóficas, essa barreira cultural pode dificultar o acesso a esses ricos insights.
 
-```bash
-requirements.txt
+### A Solução
+Este projeto propõe um ecossistema multiagente que reduz essa barreira. A partir de uma base documental de obras selecionadas, o sistema recupera o contexto semântico ideal e gera respostas independentes e personalizadas que emulam fielmente os temas, o tom e a linguagem de quatro pilares da literatura clássica.
+
+---
+
+## Objetivo da Solução
+
+* **Simular Perspectivas Distintas:** Gerar respostas independentes inspiradas no estilo de cada autor para o mesmo tema.
+* **Fundamentação por RAG:** Utilizar busca vetorial para basear as respostas em trechos e pensamentos de obras reais.
+* **Cooperação Multiagente:** Demonstrar a arquitetura estruturada de múltiplos agentes especialistas trabalhando em paralelo.
+* **Privacidade e Autonomia:** Implementar e explorar modelos de linguagem e bancos de embeddings rodando 100% de forma local.
+
+---
+
+## Arquitetura Multiagente
+
+O ecossistema utiliza uma arquitetura modular composta por **6 agentes especializados** que colaboram em um pipeline sequencial e paralelo:
+
+```text
+       ┌────────────────────────┐
+       │     Entrada Usuário    │
+       └───────────┬────────────┘
+                   ▼
+       ┌────────────────────────┐
+       │   Agente Recuperador   │ ◄─── (ChromaDB + RAG)
+       └───────────┬────────────┘
+                   │
+         ┌─────────┴─────────┬───────────────────┐
+         ▼                   ▼                   ▼
+    Shakespeare         Dostoiévski       Clarice Lispector     Virginia Woolf
+  (Agente Poético)    (Agente Psicológico) (Agente Introspectivo) (Agente Modernista)
+         │                   │                   │                   │
+         └─────────┬─────────┴───────────────────┘                   │
+                   ▼                                                 ▼
+       ┌────────────────────────┐
+       │    Agente Moderador    │
+       └───────────┬────────────┘
+                   ▼
+       ┌────────────────────────┐
+       │     Resposta Retrô     │
+       └────────────────────────┘
+
 ```
 
-A instalação poderá ser realizada através do comando:
+### Fluxo de Execução
 
-```bash
-pip install -r requirements.txt
+1. O usuário envia uma reflexão ou dilema através do console.
+2. O **Agente Recuperador** varre o banco vetorial em busca dos trechos mais semelhantes ao tema.
+3. O contexto validado é distribuído simultaneamente aos **Agentes Especialistas**.
+4. Cada especialista gera seu texto focado em sua persona literária.
+5. O **Agente Moderador** captura, organiza as saídas em blocos e renderiza o layout visual formatado em arte ASCII.
+
+---
+
+## Agentes Especializados e Bases Documentais
+
+### Agente Recuperador (Retriever Agent)
+
+* **Função:** Realiza a busca semântica na base vetorial por similaridade de cosseno.
+* **Foco:** Extrair o contexto factual mais rico para mitigar alucinações dos demais modelos.
+
+---
+
+### Agente Shakespeare
+
+Produz respostas focadas na beleza poética da linguagem elisabetana e nos paradoxos do coração humano.
+
+* **Especialidade:** Tragédias, dilemas de poder, ambição, honra, destino cruel e paixões avassaladoras.
+* **Obras Base:** *Hamlet*, *Romeu e Julieta*, *Otelo*.
+
+---
+
+### Agente Dostoiévski
+
+Gera análises profundas sob a ótica do sofrimento existencial e da complexidade da psique humana.
+
+* **Especialidade:** Filosofia existencialista, moralidade, culpa, redenção, livre-arbítrio e crise de fé.
+* **Obras Base:** *Crime e Castigo*, *Noites Brancas*, *Memórias do Subsolo*.
+
+---
+
+### Agente Clarice Lispector
+
+Respostas altamente introspectivas focadas na epifania do cotidiano e no fluxo de consciência interior.
+
+* **Especialidade:** Identidade, subjetividade da alma, solidão e crise do "eu".
+* **Obras Base:** *A Hora da Estrela*, *Perto do Coração Selvagem*, *Laços de Família*.
+
+---
+
+### Agente Virginia Woolf
+
+Explora percepções fragmentadas do tempo psicológico através da prosa modernista refinada.
+
+* **Especialidade:** Modernismo, fluxo de consciência contínuo, memória e o papel da perspectiva.
+* **Obras Base:** *Ao Farol*, *Orlando*, *Um Teto Todo Seu*.
+
+---
+
+### Agente Moderador (Moderator Agent)
+
+* **Função:** Receber as saídas geradas por cada autor, aplicar filtros estruturais e empacotar no layout visual do terminal.
+* **Foco:** Garantir que o contraste entre as visões seja apresentado ao usuário de forma limpa e legível.
+
+---
+
+## Tools Disponíveis via MCP
+
+O projeto adota o **Model Context Protocol (MCP)** para registrar de forma limpa e acoplável os recursos de sistema que os agentes podem invocar:
+
+* **`retrieve_context`:** Realiza conexões diretas de leitura na instância ativa do ChromaDB.
+* **`author_profile`:** Retorna um mapa estático contendo diretrizes estruturais de escrita de cada autor (tom, vocabulário e vícios de linguagem) para calibrar o prompt do LLM.
+* **`validate_context`:** Camada de segurança que checa se os trechos retornados do banco condizem semanticamente com a pergunta para evitar ruídos de IA.
+* **`format_response`:** Renderizador de strings responsável por desenhar as molduras e caixas em caracteres ASCII no terminal do usuário.
+
+---
+
+## Estratégia de RAG e Base de Conhecimento
+
+A arquitetura de **Geração Aumentada por Recuperação (RAG)** garante que as respostas não dependam unicamente do conhecimento genérico pré-treinado do LLM local.
+
+```text
+knowledge_base/
+├── shakespeare/   # Arquivos TXT/Markdown limpos das obras elisabetanas
+├── dostoievski/   # Romances focados em psicologia existencial russa
+├── lispector/     # Contos e romances brasileiros introspectivos
+└── woolf/         # Ensaios e romances de fluxo de consciência modernista
+
 ```
 
-A lista final de bibliotecas será definida conforme a implementação dos agentes, ferramentas, RAG e integração com o modelo local.
+Os textos são segmentados em blocos lógicos (*chunks*), processados por um modelo local de embeddings e indexados no **ChromaDB**.
 
 ---
 
 ## Estrutura do Projeto
 
 ```text
-Echoes of the Classics
+echoes-of-the-classics/
 │
-├── agentes/
-├── database/
-├── knowledge_base/
-├── mcp_server/
-├── models/
-├── rag/
-├── tools/
+├── agentes/           # Configuração de prompts e chamadas de LLM dos agentes
+├── database/          # Arquivos de persistência local do ChromaDB
+├── knowledge_base/    # Documentos textuais de domínio público fracionados por autor
+├── mcp_server/        # Infraestrutura do servidor MCP e hubs de comunicação
+│   ├── server.py      # Ponto de entrada do protocolo via STDIO
+│   └── tools.py       # Centralizador de registro das ferramentas
+├── models/            # Scripts auxiliares para configuração do Ollama
+├── rag/               # Lógica de embeddings, ingestão e busca vetorial
+├── tools/             # Código modular das funções de suporte (ASCII, validação)
 │
-├── .gitignore
-├── LICENSE
-├── main.py
-├── README.md
-└── requirements.txt
+├── .gitignore         # Exclusão de ambientes virtuais e base de dados pesadas
+├── LICENSE            # Licença padrão de uso acadêmico
+├── main.py            # Inicializador geral do ecossistema e interface de usuário
+├── README.md          # Documentação descritiva do projeto
+└── requirements.txt   # Gerenciador de dependências pip do Python
+
 ```
 
 ---
 
-## Instalação
+## Instalação e Execução (Em Desenvolvimento)
 
-O projeto encontra-se em desenvolvimento. As instruções completas de instalação e execução serão atualizadas conforme a implementação dos componentes do sistema.
+### Pré-requisitos
 
-Etapas previstas:
+Certifique-se de ter instalado em sua máquina o **Python 3.11+** e o ecossistema do **Ollama**.
 
-1. Clonar o repositório:
-
-```bash
-git clone <url-do-repositorio>
-```
-
-2. Entrar na pasta do projeto:
+1. **Clonar o Repositório:**
 
 ```bash
-cd echoes-of-the-classics
+   git clone [https://github.com/brendabragaaa/echos-of-the-classics.git](https://github.com/brendabragaaa/echos-of-the-classics.git)
+   cd echos-of-the-classics
+
 ```
 
-3. Criar e ativar um ambiente virtual Python.
+2. **Configurar Ambiente Virtual:**
 
-4. Instalar as dependências listadas em `requirements.txt`.
+```bash
+   python -m venv venv
+   # No Windows:
+   .\venv\Scripts\activate
+   # No Linux/Mac:
+   source venv/bin/activate
 
-5. Configurar o modelo local através do Ollama.
+```
 
-6. Gerar a base vetorial e os embeddings dos documentos.
+3. **Instalar Dependências:**
 
-7. Executar a aplicação principal.
+```bash
+   pip install -r requirements.txt
 
-**Observação:** Os comandos específicos poderão ser alterados durante o desenvolvimento do projeto.
+```
+
+4. **Execução:**
+As diretivas de carregamento da base vetorial e execução do loop principal (`main.py`) serão detalhadas conforme o avanço das sprints de desenvolvimento.
 
 ---
 
 ## Exemplos de Uso
 
-O usuário pode enviar perguntas, reflexões, situações pessoais ou temas livres para receber respostas inspiradas nos diferentes autores.
+**Pergunta digitada no terminal:**
 
-Pergunta:
+> *"Como lidar com a sensação de estar completamente perdido no mundo?"*
 
-* Estou com medo de tomar uma decisão importante na minha vida.
+**Comportamento Esperado na Resposta Combinada:**
 
-Resultado esperado:
-
-* Shakespeare responde enfatizando destino, ambição e consequências das escolhas.
-* Dostoiévski responde explorando conflito moral, culpa e livre-arbítrio.
-* Clarice Lispector responde por meio da introspecção e da busca pela identidade.
-* Virginia Woolf responde a partir da subjetividade e das percepções internas.
-
-Pergunta:
-
-* O que significa amar alguém?
-
-Resultado esperado: cada agente apresenta uma interpretação inspirada nos temas e estilos característicos de seu respectivo autor.
-
-Pergunta:
-
-* Como lidar com a sensação de estar perdido?
-
-Resultado esperado: o sistema apresenta quatro perspectivas distintas fundamentadas na base documental e nas características literárias dos autores representados.
+* **Shakespeare:** Retornará uma metáfora sobre o mundo ser um palco de sombras, onde o destino testa os homens, instigando o usuário a enfrentar a tragédia interna com altivez.
+* **Dostoiévski:** Evidenciará que estar perdido é o primeiro passo para o despertar espiritual e moral, tratando o sofrimento do isolamento como um processo purificador da alma.
+* **Clarice Lispector:** Validará o vazio não como um problema, mas como um mergulho visceral na própria liberdade e na busca silenciosa pela identidade.
+* **Virginia Woolf:** Mostrará a percepção do tempo passando, transformando o sentimento em impressões sensoriais e fragmentos de memória sob o fluxo das marés da vida.
 
 ---
 
 ## Conclusão
 
-O projeto demonstra a aplicação integrada de arquitetura multiagente, modelos locais, MCP, RAG, embeddings e recuperação vetorial para simular diferentes perspectivas literárias sobre um mesmo tema.
+O **Echoes of the Classics** consolida conceitos avançados de inteligência artificial de ponta de forma autônoma. Através do acoplamento do **Model Context Protocol (MCP)** com arquitetura de múltiplos agentes independentes e sistemas de busca RAG locais, o projeto prova ser uma ferramenta potente e viável para simulação analítica, contextualização literária e interface interpretativa humanizada.
 
-Por meio da cooperação entre agentes especializados em William Shakespeare, Fiódor Dostoiévski, Clarice Lispector e Virginia Woolf, o sistema permite ao usuário explorar interpretações distintas para perguntas, reflexões e situações diversas, utilizando contexto recuperado de uma base documental para produzir respostas mais coerentes e fundamentadas.
+```
+
+```
