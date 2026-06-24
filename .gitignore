@@ -1,0 +1,19 @@
+#ambientes virtuais
+.venv/
+venv/
+.venv-1/
+
+#python
+__pycache__/
+*.pyc
+*.pyo
+
+#VSCode
+.vscode/
+
+#ChromaDB
+database/chroma_db/
+
+#sistema
+.DS_Store
+Thumbs.db
