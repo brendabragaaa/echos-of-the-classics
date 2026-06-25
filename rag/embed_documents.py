@@ -18,24 +18,24 @@ def carregar_e_fatiar_texto(caminho_arquivo, tamanho_chunk=500, overlap=100):
     return chunks
 
 def indexar_base_conhecimento():
-    base_dir = "./knowledge_base"
+    base_dir = "./Knowledge_base"
     colecao = get_collection()
     
     if not os.path.exists(base_dir):
-        print(f"Erro: A pasta {base_dir} não existe. Certifique-se de criá-la.")
+        print(f"[ERRO] A pasta {base_dir} não existe. Certifique-se de criá-la.")
         return
 
-    print("Iniciando o processamento e geração de embeddings...")
+    print("[LOG INFO] Iniciando o processamento e geração de embeddings...")
     id_contador = 0
     
-    # Varre as pastas de cada autor dentro de knowledge_base/
+    # Varre as pastas de cada autor dentro de Knowledge_base/
     for autor in os.listdir(base_dir):
         autor_path = os.path.join(base_dir, autor)
         if os.path.isdir(autor_path):
             for arquivo_txt in os.listdir(autor_path):
                 if arquivo_txt.endswith(".txt"):
                     caminho_completo = os.path.join(autor_path, arquivo_txt)
-                    print(f"Processando: {autor} -> {arquivo_txt}")
+                    print(f"[LOG INFO] Processando: {autor} -> {arquivo_txt}")
                     
                     chunks = carregar_e_fatiar_texto(caminho_completo)
                     
@@ -53,7 +53,7 @@ def indexar_base_conhecimento():
                     if documents:
                         colecao.add(documents=documents, metadatas=metadatas, ids=ids)
 
-    print(f"\nSucesso! {id_contador} fragmentos literários foram indexados no ChromaDB.")
+    print(f"[LOG INFO] Sucesso! {id_contador} fragmentos literários foram indexados no ChromaDB.")
 
 if __name__ == "__main__":
     indexar_base_conhecimento()

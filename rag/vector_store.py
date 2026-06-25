@@ -16,6 +16,7 @@ embedding_function = embedding_functions.SentenceTransformerEmbeddingFunction(
 
 def get_collection():
     """Obtém ou cria a coleção para armazenar os vetores literários."""
+    print(f"[LOG INFO] Conectando ao banco de dados ChromaDB em '{DB_PATH}'...")
     return client.get_or_create_collection(
         name=COLLECTION_NAME,
         embedding_function=embedding_function
