@@ -25,7 +25,14 @@ O **Echoes of the Classics** é um sistema multiagente inteligente baseado em Mo
 
 Para o desenvolvimento e controle do ecossistema, o projeto faz uso das seguintes ferramentas:
 
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Ollama](https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white) ![ChromaDB](https://img.shields.io/badge/ChromaDB-4A90E2?style=for-the-badge&logo=databricks&logoColor=white) ![MCP](https://img.shields.io/badge/MCP-⚡%20Model%20Context-9B51E0?style=for-the-badge) ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+<p align="left">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white" alt="Ollama" />
+  <img src="https://img.shields.io/badge/ChromaDB-007ACC?style=for-the-badge&logo=googlecloud&logoColor=white" alt="ChromaDB" />
+  <img src="https://img.shields.io/badge/MCP-Protocol-9B51E0?style=for-the-badge&logo=json&logoColor=white" alt="Model Context Protocol" />
+  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git" />
+  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+</p>
 
 ---
 
