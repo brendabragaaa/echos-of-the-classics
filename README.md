@@ -1,4 +1,3 @@
-```markdown
 <p align="center">
   <img src="./cover.png" alt="Echoes of the Classics Banner" width="100%">
 </p>
@@ -248,5 +247,3 @@ As diretivas de carregamento da base vetorial e execução do loop principal (`m
 ## Conclusão
 
 **Echoes of the Classics** consolida conceitos avançados de inteligência artificial de ponta de forma autônoma. Através do acoplamento do **Model Context Protocol (MCP)** com arquitetura de múltiplos agentes independentes e sistemas de busca RAG locais, o projeto prova ser uma ferramenta potente e viável para simulação analítica, contextualização literária e interface interpretativa humanizada.
-
-```
